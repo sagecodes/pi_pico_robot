@@ -1,12 +1,16 @@
 # init servo
 import utime
-from machine import PWM,Pin
+from machine import PWM, ADC, Pin
+
+# define pin IOs
 servo_left = PWM(Pin(1))
 servo_right = PWM(Pin(2))
 on_board_led = Pin(25,Pin.OUT)
-
 led_right = Pin(15,Pin.OUT)
 led_left = Pin(16,Pin.OUT)
+photo_left = ADC(Pin(26))
+photo_right = ADC(Pin(27))
+
 
 
 
@@ -42,13 +46,16 @@ def left():
 on_board_led.value(1)
 led_right.value(1)
 led_left.value(1)
+light_left = photo_left.read_u16()
+light_right = photo_right.read_u16()
 
 
 utime.sleep(2)
+print(light_left)
+print(light_right)
 on_board_led.value(0)
 led_right.value(0)
 led_left.value(0)
-
 forward()
 utime.sleep(2)
 stop()
