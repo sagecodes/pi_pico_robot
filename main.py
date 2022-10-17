@@ -3,6 +3,12 @@ import utime
 from machine import PWM,Pin
 servo_left = PWM(Pin(1))
 servo_right = PWM(Pin(2))
+on_board_led = Pin(25,Pin.OUT)
+
+led_right = Pin(15,Pin.OUT)
+led_left = Pin(16,Pin.OUT)
+
+
 
 servo_left.freq(50)
 servo_right.freq(50)
@@ -33,6 +39,15 @@ def left():
     servo_left.duty_ns(servo_pwr2)
     servo_right.duty_ns(servoStop)
 
+on_board_led.value(1)
+led_right.value(1)
+led_left.value(1)
+
+
+utime.sleep(2)
+on_board_led.value(0)
+led_right.value(0)
+led_left.value(0)
 
 forward()
 utime.sleep(2)
