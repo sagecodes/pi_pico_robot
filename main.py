@@ -12,6 +12,8 @@ photo_left = ADC(Pin(26))
 photo_right = ADC(Pin(27))
 
 touch_right = Pin(14, Pin.IN, Pin.PULL_DOWN)
+touch_left = Pin(13, Pin.IN, Pin.PULL_DOWN)
+
 
 
 servo_left.freq(50)
@@ -60,10 +62,16 @@ led_right.value(0)
 led_left.value(0)
 
 while True:
-    if switch1.value() == 1:
+    if touch_right.value() == 1 and touch_left.value() == 1:
         led_right.value(1)
+        led_left.value(1)
+    elif touch_right.value() == 1:
+        led_right.value(1)
+    elif touch_left.value() == 1:
+        led_left.value(1)
     else:
         led_right.value(0)
+        led_left.value(0)
 
 #forward()
 #utime.sleep(2)
