@@ -29,20 +29,28 @@ def stop():
     servo_left.duty_ns(servoStop)
     servo_right.duty_ns(servoStop)
     
-def forward():
+def both_forward():
     servo_left.duty_ns(servo_pwr2)
     servo_right.duty_ns(servo_pwr1)
 
-def backward():
+def both_backward():
     servo_left.duty_ns(servo_pwr1)
     servo_right.duty_ns(servo_pwr2)
     
-def right():
+def right_forward():
     servo_left.duty_ns(servoStop)
     servo_right.duty_ns(servo_pwr1)
     
-def left():
+def left_forward():
     servo_left.duty_ns(servo_pwr2)
+    servo_right.duty_ns(servoStop)
+    
+def right_backward():
+    servo_left.duty_ns(servoStop)
+    servo_right.duty_ns(servo_pwr2)
+    
+def left_backward():
+    servo_left.duty_ns(servo_pwr1)
     servo_right.duty_ns(servoStop)
 
 on_board_led.value(1)
@@ -65,17 +73,30 @@ while True:
     if touch_right.value() == 1 and touch_left.value() == 1:
         led_right.value(1)
         led_left.value(1)
+        both_backward()
+        utime.sleep(1)
+        left_backward()
+        utime.sleep(1)
     elif touch_right.value() == 1:
         led_right.value(1)
+        both_backward()
+        utime.sleep(0.5)
+        left_backward()
+        utime.sleep(1)
     elif touch_left.value() == 1:
         led_left.value(1)
+        both_backward()
+        utime.sleep(0.5)
+        right_backward()
+        utime.sleep(1)
     else:
         led_right.value(0)
         led_left.value(0)
-
-#forward()
-#utime.sleep(2)
-#stop()
+        both_forward()
+        #utime.sleep(2)
+        #stop()
+        
+        
 #utime.sleep(2)
 #backward()
 #utime.sleep(2)
