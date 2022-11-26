@@ -52,6 +52,17 @@ def right_backward():
 def left_backward():
     servo_left.duty_ns(servo_pwr1)
     servo_right.duty_ns(servoStop)
+    
+def light_follow():
+    light_left = photo_left.read_u16()
+    light_right = photo_right.read_u16()
+    if light_right < light_left:
+        servo_right.duty_ns(servo_pwr1)
+        servo_left.duty_ns(servoStop)
+    elif light_left < light_right:
+        servo_right.duty_ns(servoStop)
+        servo_left.duty_ns(servo_pwr2)
+        
 
 on_board_led.value(1)
 led_right.value(1)
@@ -92,7 +103,8 @@ while True:
     else:
         led_right.value(0)
         led_left.value(0)
-        both_forward()
+        light_follow()
+        # both_forward()
         #utime.sleep(2)
         #stop()
         
