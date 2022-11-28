@@ -1,8 +1,10 @@
-# init servo
+# Import libraries 
 import utime
 from machine import PWM, ADC, Pin
 
-# define pin IOs
+
+
+# Define pin IOs
 servo_left = PWM(Pin(1))
 servo_right = PWM(Pin(2))
 on_board_led = Pin(25,Pin.OUT)
@@ -10,12 +12,11 @@ led_right = Pin(15,Pin.OUT)
 led_left = Pin(16,Pin.OUT)
 photo_left = ADC(Pin(26))
 photo_right = ADC(Pin(27))
-
 touch_right = Pin(14, Pin.IN, Pin.PULL_DOWN)
 touch_left = Pin(13, Pin.IN, Pin.PULL_DOWN)
 
 
-
+# Set PWM Frequency
 servo_left.freq(50)
 servo_right.freq(50)
 
@@ -107,17 +108,3 @@ while True:
         # both_forward()
         #utime.sleep(2)
         #stop()
-        
-        
-#utime.sleep(2)
-#backward()
-#utime.sleep(2)
-#stop()
-#utime.sleep(2)
-#left()
-#utime.sleep(2)
-#stop()
-#utime.sleep(2)
-#right()
-#utime.sleep(2)
-#stop()
